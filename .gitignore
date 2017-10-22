@@ -1,7 +1,13 @@
 .idea/
+.vscode/
 
 node_modules/
 
-*-env/
+*env/
 
 static/build.js
+
+*.db
+*.sqlite3
+
+__pycache__

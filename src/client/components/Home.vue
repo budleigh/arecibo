@@ -8,17 +8,17 @@
     export default {
         data () {
             return {
-                welcomeMessage: 'Landing!',
+                welcomeMessage: 'Home!',
             }
         },
 
         beforeRouteEnter (rto, rfrom, next) {
             next(vm => {
-                vm.$store.state.user.loggedIn
-                    ? next('/home')
+                !vm.$store.state.user.loggedIn
+                    ? next('/landing')
                     : next(true)
             })
-        },
+        }
     }
 </script>
 
