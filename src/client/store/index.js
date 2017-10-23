@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import UserModule from './user'
-import FormsModule from './forms'
+import UserModule from './modules/user'
+import FormsModule from './modules/forms'
 
 Vue.use(Vuex)
 
