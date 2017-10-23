@@ -1,17 +1,25 @@
 <template>
     <div>
-       <h3>{{ welcomeMessage }}</h3>
+        <h3>{{ message }}</h3>
+        <h5>{{ email }}</h5>
     </div>
 </template>
 
 <script>
+    import {mapState} from 'vuex'
+
     export default {
         data () {
             return {
-                welcomeMessage: 'Home!',
+                message: 'Home!',
             }
         },
 
+        computed: mapState({
+            email: state => state.user.email,
+        }),
+
+        // route guards
         beforeRouteEnter (rto, rfrom, next) {
             next(vm => {
                 !vm.$store.state.user.loggedIn

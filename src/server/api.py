@@ -1,4 +1,4 @@
-from flask import Blueprint, request, abort
+from flask import Blueprint, request, make_response, jsonify
 from src.server.db import db
 from src.server.db.models import *
 
@@ -11,28 +11,49 @@ if not User.table_exists():
     ])
 
 
-@api.route('/user/new', methods=['POST'])
-def user_new():
+@api.route('/auth/', methods=['POST'])
+def auth():
     data = request.get_json()
-    email = data['email']
-    password = data['password']
+    auth_type = data['auth_type']
 
-    new_user = User(email=email, password=password)
+    if auth_type == 'up':
+        return new_user(data['email'], data['password'])
+    elif auth_type == 'in':
+        return sign_in(data['email'], data['password'])
+
+
+def new_user(email, password):
+    user = User(email=email, password=password)
     try:
-        new_user.save()
+        user.make_token()
+        user.save()
+        return jsonify({
+            'email': user.email,
+            'token': user.token,
+        }), 201
     except IntegrityError:
-        abort(400)
+        return jsonify({
+            'error': 'User already exists',
+        }), 400
 
 
-@api.route('/user/login', methods=['POST'])
-def user_login():
-    data = request.get_json()
-    email = data['email']
-    password = data['password']
+def sign_in(email, password):
+    user = User.select().where(User.email == email).get()
+    if user and user.password == password:
+        user.make_token()
+        user.save()
+        return jsonify({
+            'email': user.email,
+            'token': user.token,
+        }), 200
+    else:
+        return jsonify({
+            'error': 'User not found',
+        }), 404
 
 
-@api.route('/user/logout', methods=['POST'])
-def user_logout():
-    data = request.get_json()
-    email = data['email']
-    token = data['token']
+def sign_out(email):
+    user = User.select().where(User.email == email).get()
+    if user:
+        user.token = None
+        user.save()

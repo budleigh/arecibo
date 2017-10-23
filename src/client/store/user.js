@@ -20,13 +20,4 @@ export default {
             state.token = null
         },
     },
-
-    actions: {
-        signup ({commit}) {
-            $.post({
-                url: '/user/new',
-                success: _ => commit('login', {}),
-            })
-        }
-    }
 }
