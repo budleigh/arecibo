@@ -7,7 +7,7 @@ SPA/webapp template with front-end and back-end boilerplate using Flask, Pewee a
 - Future plans dropped in the todo file at root
 
 # use
-- Requires Python >=3.6, Node >= 8.6
+## Requires Python >=3.6, Node >= 8.6
 
 1. Clone repo
 2. ```virtualenv a-env```
