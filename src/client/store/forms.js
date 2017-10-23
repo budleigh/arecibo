@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import _ from 'underscore'
 
-function formsInitialStateBuilder () {
+function formsInitialStoreBuilder () {
     return {
         auth: {
             fields: {
@@ -16,7 +16,7 @@ function formsInitialStateBuilder () {
 }
 
 export default {
-    state: formsInitialStateBuilder(),
+    state: formsInitialStoreBuilder(),
 
     actions: {
         submit ({commit, state}, {form, success, error}) {
