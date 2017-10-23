@@ -1,11 +1,13 @@
-import $ from 'jquery'
+function userInitialStoreBuilder () {
+    return {
+        email: window.localStorage.email,
+        loggedIn: window.localStorage.email !== undefined,
+        token: window.localStorage.token,
+    }
+}
 
 export default {
-    state: {
-        email: null,
-        loggedIn: false,
-        token: null,
-    },
+    state: userInitialStoreBuilder(),
 
     mutations: {
         login (state, {email, token}) {

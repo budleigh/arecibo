@@ -1,8 +1,8 @@
 import $ from 'jquery'
 import _ from 'underscore'
 
-export default {
-    state: {
+function formsInitialStateBuilder () {
+    return {
         auth: {
             fields: {
                 email: '',
@@ -12,7 +12,11 @@ export default {
             endpoint: '/auth/',
             method: 'POST',
         },
-    },
+    }
+}
+
+export default {
+    state: formsInitialStateBuilder(),
 
     actions: {
         submit ({commit, state}, {form, success, error}) {

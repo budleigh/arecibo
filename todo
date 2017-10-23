@@ -1,0 +1,2 @@
+- pull out the submit function into the vuex_form mixin
+- server and client side response validators

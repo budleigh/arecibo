@@ -28,6 +28,7 @@
                     form: 'auth',
                     success: res => {
                         this.$store.commit('login', res)
+                        this.$store.dispatch('updateLocalStorage', res)
                         this.$router.push('/home')
                     },
                     error: res => {
@@ -35,14 +36,6 @@
                     },
                 })
             },
-
-            updateField (e) {
-                this.$store.commit('updateField', {
-                    form: 'auth',
-                    field: e.target.name,
-                    val: e.target.value,
-                })
-            }
         },
 
         // route guards
